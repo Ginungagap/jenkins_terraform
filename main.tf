@@ -58,7 +58,7 @@ resource "google_compute_instance" "mongo-db" {
 }
 
 
-resource "null_resource" "mongo-db-provider" {
+resource "null_resource" "mongo-db-provisioner" {
  
   connection {
     user = "Gin"
@@ -82,7 +82,7 @@ resource "null_resource" "mongo-db-provider" {
 }
 
 
-resource "null_resource" "production-provider" {
+resource "null_resource" "production-provisioner" {
  
   connection {
     user = "Gin"
@@ -99,7 +99,8 @@ resource "null_resource" "production-provider" {
   provisioner "file" {
     //source      = "./.ssh/ssh-key.pub"
     source      = "/var/lib/jenkins/.ssh/jenkins.pub"
-    destination = "/tmp/ssh-key.pub"
+    //destination = "/tmp/ssh-key.pub"
+    destination = "/tmp/jenkins.pub"
   }
 
   provisioner "remote-exec" {

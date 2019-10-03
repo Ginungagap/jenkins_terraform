@@ -28,6 +28,7 @@ sudo su <<_EOF_
 useradd -m jenkins
 mkdir -p /home/jenkins/.ssh
 chmod 700 /home/jenkins/.ssh
+mv /tmp/jenkins.pub /home/jenkins/.ssh/
 cat /tmp/jenkins.pub >> /home/jenkins/.ssh/authorized_keys
 chown jenkins:jenkins /home/jenkins/.ssh/ /home/jenkins/.ssh/authorized_keys
 chown jenkins:jenkins /usr/lib/systemd/system/carts.service
