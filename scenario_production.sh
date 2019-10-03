@@ -1,9 +1,5 @@
 #!/bin/bash
 
-MONGO_NETWORK_DB=$1
-
-#sudo yum update -y -q
-
 sudo yum install git -y 
 sudo yum install java-1.8.0-openjdk-devel -y 
 
@@ -12,7 +8,7 @@ sudo sh -c 'cat << EOF >> /usr/lib/systemd/system/carts.service
 Description=Start ans Stop jar
 
 [Service]
-ExecStart=/usr/bin/java -jar -Ddb:carts-db=$MONGO_NETWORK_DB /home/jenkins/carts.jar
+ExecStart=/usr/bin/java -jar -Ddb:carts-db=mongo-db /home/jenkins/carts.jar
 Restart=always
 KillMode=control-group
 User=jenkins
@@ -22,14 +18,14 @@ WantedBy=multi-user.target
 
 EOF'
 
-sudo sed -i "s/-Ddb:carts-db=/-Ddb:carts-db=${MONGO_NETWORK_DB}/" /usr/lib/systemd/system/carts.service
+sudo sed -i "s/-Ddb:carts-db=/-Ddb:carts-db=mongo-db/" /usr/lib/systemd/system/carts.service
 
 sudo su <<_EOF_
 useradd -m jenkins
 mkdir -p /home/jenkins/.ssh
 chmod 700 /home/jenkins/.ssh
-mv /tmp/jenkins.pub /home/jenkins/.ssh/
 cat /tmp/jenkins.pub >> /home/jenkins/.ssh/authorized_keys
+mv /tmp/jenkins.pub /home/jenkins/.ssh/
 chown jenkins:jenkins /home/jenkins/.ssh/ /home/jenkins/.ssh/authorized_keys
 chown jenkins:jenkins /usr/lib/systemd/system/carts.service
 usermod -a -G adm,video,google-sudoers jenkins

@@ -106,7 +106,7 @@ resource "null_resource" "production-provisioner" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x ~/scenario_production.sh",
-      "sudo ~/scenario_production.sh ${var.network_ip_mongo}",
+      "sudo ~/scenario_production.sh",
     ]
   }
 }

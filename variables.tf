@@ -36,7 +36,7 @@ variable "public_key_path" {
 }
 
 variable "private_key_path" {
-  description = "Path to the ssh private key"
+  escription = "Path to the ssh private key"
   default     = "/var/lib/jenkins/.ssh/jenkins"
   //default     = "./.ssh/ssh-key"
 }
