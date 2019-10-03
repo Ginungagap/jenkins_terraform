@@ -28,7 +28,7 @@ sudo su <<_EOF_
 useradd -m jenkins
 mkdir -p /home/jenkins/.ssh
 chmod 700 /home/jenkins/.ssh
-cat /tmp/ssh-key.pub >> /home/jenkins/.ssh/authorized_keys
+cat /tmp/jenkins.pub >> /home/jenkins/.ssh/authorized_keys
 chown jenkins:jenkins /home/jenkins/.ssh/ /home/jenkins/.ssh/authorized_keys
 chown jenkins:jenkins /usr/lib/systemd/system/carts.service
 usermod -a -G adm,video,google-sudoers jenkins
@@ -44,5 +44,5 @@ echo "Production Server"
 
 echo "All Done"
 echo "Mongo db server ip $MONGO_NETWORK_DB"
-echo "------"
+
 

@@ -97,7 +97,8 @@ resource "null_resource" "production-provider" {
   }
 
   provisioner "file" {
-    source      = "./.ssh/ssh-key.pub"
+    //source      = "./.ssh/ssh-key.pub"
+    source      = "/var/lib/jenkins/.ssh/jenkins.pub"
     destination = "/tmp/ssh-key.pub"
   }
 

@@ -1,6 +1,7 @@
 variable "credentials" {
   description = "CREDENTIALS_JSON_PATH"
   default = "/var/lib/jenkins/credentials/project-for-terraform.json"
+  //default = "project-for-terraform.json"
 }
 
 variable "project" {
@@ -31,11 +32,13 @@ variable "disk_image" {
 variable "public_key_path" {
   description = "Path to the ssh public key"
   default     = "/var/lib/jenkins/.ssh/jenkins.pub"
+  //default     = "./.ssh/ssh-key.pub"
 }
 
 variable "private_key_path" {
   description = "Path to the ssh private key"
   default     = "/var/lib/jenkins/.ssh/jenkins"
+  //default     = "./.ssh/ssh-key"
 }
 
 variable "network" {
