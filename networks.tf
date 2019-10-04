@@ -10,7 +10,7 @@ resource "google_compute_firewall" "prod-8081" {
   }
 }
 
-resource "google_compute_firewall" "mongo-db" {
+resource "google_compute_firewall" "mongo-db-27017" {
   name    = "mongo-db"
   network = var.network
     

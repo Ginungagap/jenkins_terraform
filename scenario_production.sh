@@ -35,11 +35,5 @@ systemctl enable carts
 exit
 _EOF_
 
-
-
 echo "Production Server"
-
 echo "All Done"
-echo "Mongo db server ip $MONGO_NETWORK_DB"
-
-

@@ -17,7 +17,7 @@ resource "google_compute_instance" "production" {
   }
 
   metadata = {
-    ssh-keys = "Gin:${file(var.public_key_path)}"
+    ssh-keys = "jenkins:${file(var.public_key_path)}"
   }
 
   metadata_startup_script = ""
@@ -35,7 +35,7 @@ resource "google_compute_instance" "mongo-db" {
  name         = "mongo-db"
  machine_type = var.machine_type
  zone         = var.zone
- tags         = ["mongo-db"]
+ tags         = ["mongo-db-27017"]
 
   boot_disk {
     initialize_params {
@@ -44,7 +44,7 @@ resource "google_compute_instance" "mongo-db" {
   }
 
   metadata = {
-    ssh-keys = "Gin:${file(var.public_key_path)}"
+    ssh-keys = "jenkins:${file(var.public_key_path)}"
   }
 
   metadata_startup_script = ""
@@ -61,7 +61,8 @@ resource "google_compute_instance" "mongo-db" {
 resource "null_resource" "mongo-db-provisioner" {
  
   connection {
-    user = "Gin"
+    type = "ssh"
+    user = "jenkins"
     host = "${google_compute_instance.mongo-db.network_interface.0.access_config.0.nat_ip}"
     private_key = "${file(var.private_key_path)}"
     agent = false   
@@ -85,7 +86,8 @@ resource "null_resource" "mongo-db-provisioner" {
 resource "null_resource" "production-provisioner" {
  
   connection {
-    user = "Gin"
+    type = "ssh"
+    user = "jenkins"
     host = "${google_compute_instance.production.network_interface.0.access_config.0.nat_ip}"
     private_key = "${file(var.private_key_path)}"
     agent = false   
